@@ -190,13 +190,8 @@ function TradeCooldownFu:CHAT_MSG_LOOT()
     FTC_Save[FTC_SaveKey][skillName].LastCheck = time();
     FTC_Save[FTC_SaveKey][skillName].IsReady = 0;
   end
-	local _, _, created = string.find(arg1, TRADECOOLDOWNFU_CREATESEARCH);
-	if (created) then
-		--DEFAULT_CHAT_FRAME:AddMessage("Test "..created); 
-	else
-		--DEFAULT_CHAT_FRAME:AddMessage("Test None"); 
-	end
-  if ( created and string.find(created, TRADECOOLDOWNFU_SNOWBALL) ) then
+	local created = string.find(arg1, TRADECOOLDOWNFU_CREATESEARCH)
+  if (created ~= nil and string.find(arg1, TRADECOOLDOWNFU_SNOWBALL) ~= nil) then
   	--DEFAULT_CHAT_FRAME:AddMessage("Test Snow"..created); 
   	local skillName = TRADECOOLDOWNFU_SNOWMASTER;
     if ( FTC_Save[FTC_SaveKey] == nil ) then
@@ -208,7 +203,7 @@ function TradeCooldownFu:CHAT_MSG_LOOT()
     FTC_Save[FTC_SaveKey][skillName].Cooldown = 86400;
     FTC_Save[FTC_SaveKey][skillName].LastCheck = time();
     FTC_Save[FTC_SaveKey][skillName].IsReady = 0;
-  elseif ( created and string.find(created, TRADECOOLDOWNFU_REFINEDSALT) ) then
+  elseif (created ~= nil and string.find(arg1, TRADECOOLDOWNFU_REFINEDSALT) ~= nil) then
   	--DEFAULT_CHAT_FRAME:AddMessage("Test SS"..created); 
 		local skillName = TRADECOOLDOWNFU_SALTSHAKER;
     if ( FTC_Save[FTC_SaveKey] == nil ) then

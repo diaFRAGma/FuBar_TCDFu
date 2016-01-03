@@ -1,7 +1,50 @@
 FTC_Save    = {};
 FTC_SaveKey = "";
 
-if ( GetLocale() ~= "koKR" ) then																			-- techys (from)
+if (GetLocale() == "koKR") then
+	TRADECOOLDOWNFU_READYNOTIFY0 = "|cff00FF00TradeCooldown:|r %s for %s:%s 준비.";
+	TRADECOOLDOWNFU_READYNOTIFY1 = "|cff00FF00TradeCooldown:|r %s for %s:%s 는 %ss 준비됩니다.";
+	TRADECOOLDOWNFU_READY_COLOR = "|cff00FF00";
+	TRADECOOLDOWNFU_NOTREADY_COLOR = "|cffFF0000";
+	TRADECOOLDOWNFU_ALMOSTREADY_COLOR = "|cffF0F000";
+	TRADECOOLDOWNFU_CONFIRM = "모든 전문기술 쿨다운 자료를 삭제하시겠습니까?";
+	TRADECOOLDOWNFU_FORMAT = "%d/%d";
+	TRADECOOLDOWNFU_READY = "준비!";
+	TRADECOOLDOWNFU_MOONCLOTH = "달빛 옷감";
+	TRADECOOLDOWNFU_SALTSHAKER = "소금 정제기";
+	TRADECOOLDOWNFU_REFINEDSALT = "정제된 깊은바다 소금";
+	TRADECOOLDOWNFU_SNOWMASTER = "눈뭉치제조기 9000";
+	TRADECOOLDOWNFU_SNOWBALL = "눈뭉치";
+	TRADECOOLDOWNFU_ELUNESLANTERN = "엘룬의 등불";
+	TRADECOOLDOWNFU_ELUNESTONE = "엘룬의 돌";
+	TRADECOOLDOWNFU_TRANSMUTE_MATCH = "변환식";
+	TRADECOOLDOWNFU_TRANSMUTES = "변환";
+	TRADECOOLDOWNFU_NODATA = "자료 없음";
+	TRADECOOLDOWNFU_CREATESEARCH = "아이템을 획득했습니다: (.*).";
+	TRADECOOLDOWNFU_BUTTON_LABEL = "쿨다운 : ";
+elseif (GetLocale() == "deDE") then
+	TRADECOOLDOWNFU_NOTIFYTIME = 60;
+	TRADECOOLDOWNFU_READYNOTIFY0 = "|cff00FF00TradeCooldown:|r %s f\195\188r %s:%s ist bereit.";
+	TRADECOOLDOWNFU_READYNOTIFY1 = "|cff00FF00TradeCooldown:|r %s f\195\188r %s:%s ist bereit in %ss.";
+	TRADECOOLDOWNFU_READY_COLOR = "|cff00FF00";
+	TRADECOOLDOWNFU_NOTREADY_COLOR = "|cffFF0000";
+	TRADECOOLDOWNFU_ALMOSTREADY_COLOR = "|cffF0F000";
+	TRADECOOLDOWNFU_CONFIRM = "Bist du dir sicher, dass du alle Daten von TradeCooldown löschen m\195\182chtest?";
+	TRADECOOLDOWNFU_FORMAT = "%d/%d";
+	TRADECOOLDOWNFU_READY = "Bereit!";
+	TRADECOOLDOWNFU_MOONCLOTH = "Mondstoff";
+	TRADECOOLDOWNFU_SALTSHAKER = "Salzstreuer";
+	TRADECOOLDOWNFU_REFINEDSALT = "Raffiniertes Tiefsteinsalz";
+	TRADECOOLDOWNFU_SNOWMASTER = "Schneemeister 9000";
+	TRADECOOLDOWNFU_SNOWBALL = "Schneeball";
+	TRADECOOLDOWNFU_ELUNESLANTERN = "Elunes Laterne";
+	TRADECOOLDOWNFU_ELUNESTONE = "Elunes Stein";
+	TRADECOOLDOWNFU_TRANSMUTE_MATCH = "Transmutieren";
+	TRADECOOLDOWNFU_TRANSMUTES = "Transmutieren";
+	TRADECOOLDOWNFU_NODATA = "Keine Daten";
+	TRADECOOLDOWNFU_CREATESEARCH = "Ihr stellt her: ";
+	TRADECOOLDOWNFU_BUTTON_LABEL = "Cooldown: ";
+else
 	TRADECOOLDOWNFU_NOTIFYTIME = 60;
 	TRADECOOLDOWNFU_READYNOTIFY0 = "|cff00FF00TradeCooldown:|r %s for %s:%s is ready.";
 	TRADECOOLDOWNFU_READYNOTIFY1 = "|cff00FF00TradeCooldown:|r %s for %s:%s will be ready in %ss.";
@@ -23,30 +66,22 @@ if ( GetLocale() ~= "koKR" ) then																			-- techys (from)
 	TRADECOOLDOWNFU_NODATA = "No Data";
 	TRADECOOLDOWNFU_CREATESEARCH = "You receive item(.*).";
 	TRADECOOLDOWNFU_BUTTON_LABEL = "Cooldown : ";
-else
-	TRADECOOLDOWNFU_READYNOTIFY0 = "|cff00FF00TradeCooldown:|r %s for %s:%s 준비.";
-	TRADECOOLDOWNFU_READYNOTIFY1 = "|cff00FF00TradeCooldown:|r %s for %s:%s 는 %ss 준비됩니다.";
-	TRADECOOLDOWNFU_READY_COLOR = "|cff00FF00";
-	TRADECOOLDOWNFU_NOTREADY_COLOR = "|cffFF0000";
-	TRADECOOLDOWNFU_ALMOSTREADY_COLOR = "|cffF0F000";
-	TRADECOOLDOWNFU_CONFIRM = "모든 전문기술 쿨다운 자료를 삭제하시겠습니까?";
-	TRADECOOLDOWNFU_FORMAT = "%d/%d";
-	TRADECOOLDOWNFU_READY = "준비!";
-	TRADECOOLDOWNFU_MOONCLOTH = "달빛 옷감";
-	TRADECOOLDOWNFU_SALTSHAKER = "소금 정제기";
-	TRADECOOLDOWNFU_REFINEDSALT = "정제된 깊은바다 소금";
-	TRADECOOLDOWNFU_SNOWMASTER = "눈뭉치제조기 9000";
-	TRADECOOLDOWNFU_SNOWBALL = "눈뭉치";
-	TRADECOOLDOWNFU_ELUNESLANTERN = "엘룬의 등불";
-	TRADECOOLDOWNFU_ELUNESTONE = "엘룬의 돌";
-	TRADECOOLDOWNFU_TRANSMUTE_MATCH = "변환식";
-	TRADECOOLDOWNFU_TRANSMUTES = "변환";
-	TRADECOOLDOWNFU_NODATA = "자료 없음";
-	TRADECOOLDOWNFU_CREATESEARCH = "아이템을 획득했습니다: (.*).";
-	TRADECOOLDOWNFU_BUTTON_LABEL = "쿨다운 : ";
-end																									-- techys (until)
+end
 
 local L = AceLibrary("AceLocale-2.0"):new("TradeCooldownFu")
+
+L:RegisterTranslations("deDE", function() return {
+	NAME = "FuBar - TradeCooldownFu",
+	DESCRIPTION = "\195\156berwacht die Handels Cooldowns.",
+	
+	HIDE_LABEL = "Verberge das Label";
+	NOTIFY_LABEL = "Benachrichtigung";
+	CLEAR_LABEL = "Daten l\195\182schen";	
+	
+	MENU_SHOW_TEXT1 = "Manueller Cooldown";
+	MENU_SHOW_TEXT_MANUALDEEPROCK = "Starte Tiefsteinsalz";
+	MENU_SHOW_TEXT_MANUALSNOWBALL = "Starte Schneeball";
+} end )
 
 L:RegisterTranslations("enUS", function() return {
 	NAME = "FuBar - TradeCooldownFu",
